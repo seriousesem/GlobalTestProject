@@ -2,6 +2,7 @@ package com.serioussem.globaltestproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.serioussem.globaltestproject.R
 import com.serioussem.globaltestproject.databinding.ActivityMainBinding
@@ -18,12 +19,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        swipeRefresh()
         initObservers()
     }
 
     private fun initObservers() {
-        viewModel.data.observe(this@MainActivity){
-            binding.content.text = it.apiModel.toString()
+        viewModel.data.observe(this@MainActivity){apiModel ->
+            apiModel?.apiModel?.forEach {
+                Log.d("Sem", "$it")
+                binding.content.text = it.toString()
+            }
+        }
+    }
+    private fun swipeRefresh() {
+        binding.swipeRefreshContainer.setOnRefreshListener {
+            viewModel.fetchData()
+            binding.swipeRefreshContainer.isRefreshing = false
         }
     }
 }
