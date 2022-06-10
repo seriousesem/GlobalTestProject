@@ -1,10 +1,8 @@
 package com.serioussem.globaltestproject.domain.repository
 
-import com.serioussem.globaltestproject.data.model.AnimeModel
-import com.serioussem.globaltestproject.data.model.ApiModel
 import com.serioussem.globaltestproject.data.model.MonoModel
-import retrofit2.Response
+import com.serioussem.globaltestproject.data.model.PrivatModel
 
 interface Repository {
-   suspend fun fetchData(): List<ApiModel>
+   suspend fun fetchData(): List<MonoModel>
 }

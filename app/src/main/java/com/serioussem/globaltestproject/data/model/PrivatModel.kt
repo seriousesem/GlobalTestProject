@@ -2,7 +2,7 @@ package com.serioussem.globaltestproject.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiModel(
+data class PrivatModel(
 
 	@field:SerializedName("sale")
 	val sale: String,

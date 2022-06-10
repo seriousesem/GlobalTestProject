@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -37,6 +36,11 @@ android {
 }
 
 dependencies {
+
+    // Koin for Android
+    implementation "io.insert-koin:koin-android:$rootProject.koin_version"
+    implementation "io.insert-koin:koin-core:$rootProject.koin_version"
+
     // Logging interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingVersion"
 

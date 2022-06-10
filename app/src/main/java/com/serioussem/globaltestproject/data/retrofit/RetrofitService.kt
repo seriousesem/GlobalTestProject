@@ -1,11 +1,9 @@
 package com.serioussem.globaltestproject.data.retrofit
 
-import com.serioussem.globaltestproject.data.model.AnimeModel
-import com.serioussem.globaltestproject.data.model.ApiModel
 import com.serioussem.globaltestproject.data.model.MonoModel
+import com.serioussem.globaltestproject.data.model.PrivatModel
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Headers
 
 interface RetrofitService {
 
@@ -15,6 +13,6 @@ interface RetrofitService {
         private const val ANIME_ENDPOINT = "api/v1"
     }
 
-    @GET(PRIVAT_ENDPOINT)
-    suspend fun fetchData(): Response<List<ApiModel>>
+    @GET(MONO_ENDPOINT)
+    suspend fun fetchData(): Response<List<MonoModel>>
 }
