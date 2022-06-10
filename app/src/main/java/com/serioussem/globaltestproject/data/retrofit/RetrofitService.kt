@@ -16,5 +16,5 @@ interface RetrofitService {
     }
 
     @GET(PRIVAT_ENDPOINT)
-    suspend fun fetchData(): Response<ApiModel>
+    suspend fun fetchData(): Response<List<ApiModel>>
 }

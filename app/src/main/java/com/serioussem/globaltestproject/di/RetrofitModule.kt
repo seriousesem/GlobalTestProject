@@ -26,7 +26,6 @@ object RetrofitModule {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-
     @Provides
     @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
@@ -38,12 +37,16 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitService(okHttpClient: OkHttpClient): RetrofitService {
-        return Retrofit.Builder().apply {
-            baseUrl(PRIVAT_BASE_URL)
-            addConverterFactory(GsonConverterFactory.create())
-            client(okHttpClient)
-        }.build()
-            .create(RetrofitService::class.java)
-    }
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(PRIVAT_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofitService(retrofit: Retrofit): RetrofitService =
+        retrofit.create(RetrofitService::class.java)
+
 }

@@ -18,16 +18,16 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private var mutableData: MutableLiveData<ApiModel> = MutableLiveData<ApiModel>()
-    val data: LiveData<ApiModel> = mutableData
+    private var mutableData: MutableLiveData<List<ApiModel>> = MutableLiveData<List<ApiModel>>()
+    val data: LiveData<List<ApiModel>> = mutableData
 
     init {
         fetchData()
     }
 
     fun fetchData() {
-        viewModelScope.launch(Dispatchers.Main) {
-            mutableData.value = (repository.fetchData())
+        viewModelScope.launch(Dispatchers.IO) {
+            mutableData.postValue(repository.fetchData())
         }
     }
 }

@@ -18,26 +18,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        swipeRefresh()
+        initData()
         initObservers()
     }
-
     private fun initObservers() {
-        viewModel.data.observe(this@MainActivity){
-//                updateView(it as ApiModel)
+        viewModel.data.observe(this@MainActivity) {
+            binding.textView.text = it.toString()
         }
     }
-    private fun swipeRefresh() {
-        binding.swipeRefreshContainer.setOnRefreshListener {
-            viewModel.fetchData()
-            binding.swipeRefreshContainer.isRefreshing = false
-        }
+    private fun initData() {
+        viewModel.fetchData()
     }
-
-    private fun updateView(data: ApiModel){
-        binding.textView.text = data.apiModel[0]?.ccy
-    }
-
 }

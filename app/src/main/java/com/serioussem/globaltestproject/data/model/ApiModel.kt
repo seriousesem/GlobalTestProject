@@ -4,12 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ApiModel(
 
-	@field:SerializedName("ApiModel")
-	val apiModel: List<ApiModelItem?>
-)
-
-data class ApiModelItem(
-
 	@field:SerializedName("sale")
 	val sale: String,
 

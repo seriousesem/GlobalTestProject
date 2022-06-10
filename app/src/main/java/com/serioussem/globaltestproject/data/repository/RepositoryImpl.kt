@@ -6,10 +6,11 @@ import com.serioussem.globaltestproject.data.model.ApiModel
 import com.serioussem.globaltestproject.data.model.MonoModel
 import com.serioussem.globaltestproject.data.retrofit.RetrofitService
 import com.serioussem.globaltestproject.domain.repository.Repository
+import retrofit2.Response
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val service: RetrofitService) : Repository {
-    override suspend fun fetchData(): ApiModel =
+    override suspend fun fetchData(): List<ApiModel> =
         try {
             val response = service.fetchData()
             val body = response.body()
@@ -17,7 +18,8 @@ class RepositoryImpl @Inject constructor(private val service: RetrofitService) :
             Log.d("Sem", "$body")
             body!!
         }catch (e: Exception) {
-            ApiModel(listOf())
+            Log.d("Sem", e.message.toString())
+            listOf<ApiModel>()
         }
 
 
