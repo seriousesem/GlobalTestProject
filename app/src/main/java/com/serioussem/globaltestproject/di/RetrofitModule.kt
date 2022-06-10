@@ -18,6 +18,7 @@ object RetrofitModule {
 
     private const val PRIVAT_BASE_URL = "https://api.privatbank.ua/p24api/"
     private const val MONO_BASE_URL = "https://api.monobank.ua/"
+    private const val ANIME_BASE_URL = "https://anime-facts-rest-api.herokuapp.com/"
 
     @Provides
     @Singleton
@@ -39,7 +40,7 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofitService(okHttpClient: OkHttpClient): RetrofitService {
         return Retrofit.Builder().apply {
-            baseUrl(MONO_BASE_URL)
+            baseUrl(PRIVAT_BASE_URL)
             addConverterFactory(GsonConverterFactory.create())
             client(okHttpClient)
         }.build()

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.serioussem.globaltestproject.R
+import com.serioussem.globaltestproject.data.model.ApiModel
 import com.serioussem.globaltestproject.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,10 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObservers() {
         viewModel.data.observe(this@MainActivity){
-            it?.monoModel?.forEach {item ->
-                Log.d("Sem", "$item")
-                binding.content.text = item.toString()
-            }
+//                updateView(it as ApiModel)
         }
     }
     private fun swipeRefresh() {
@@ -37,4 +35,9 @@ class MainActivity : AppCompatActivity() {
             binding.swipeRefreshContainer.isRefreshing = false
         }
     }
+
+    private fun updateView(data: ApiModel){
+        binding.textView.text = data.apiModel[0]?.ccy
+    }
+
 }
