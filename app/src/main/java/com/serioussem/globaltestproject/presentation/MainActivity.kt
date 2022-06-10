@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        viewModel.data.observe(this@MainActivity){apiModel ->
-            apiModel?.apiModel?.forEach {
-                Log.d("Sem", "$it")
-                binding.content.text = it.toString()
+        viewModel.data.observe(this@MainActivity){
+            it?.monoModel?.forEach {item ->
+                Log.d("Sem", "$item")
+                binding.content.text = item.toString()
             }
         }
     }

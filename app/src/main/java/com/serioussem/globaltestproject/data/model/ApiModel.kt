@@ -5,20 +5,20 @@ import com.google.gson.annotations.SerializedName
 data class ApiModel(
 
 	@field:SerializedName("ApiModel")
-	val apiModel: List<ApiModelItem?>? = null
+	val apiModel: List<ApiModelItem?>
 )
 
 data class ApiModelItem(
 
 	@field:SerializedName("sale")
-	val sale: String? = null,
+	val sale: String,
 
 	@field:SerializedName("base_ccy")
-	val baseCcy: String? = null,
+	val baseCcy: String,
 
 	@field:SerializedName("buy")
-	val buy: String? = null,
+	val buy: String,
 
 	@field:SerializedName("ccy")
-	val ccy: String? = null
+	val ccy: String
 )
