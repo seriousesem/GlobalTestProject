@@ -31,5 +31,5 @@ ext {
     daggerVersion = '2.38.1'
     hiltVersion = '2.42'
     swipeRefresh = '1.1.0'
-    jsoupVersion = '1.14.3'
+    jsoupVersion = '1.15.2'
 }
