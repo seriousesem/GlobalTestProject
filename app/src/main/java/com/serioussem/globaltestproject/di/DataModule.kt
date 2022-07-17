@@ -1,5 +1,6 @@
 package com.serioussem.globaltestproject.di
 
+import com.serioussem.globaltestproject.data.jsoup.JsoupService
 import com.serioussem.globaltestproject.data.repository.RepositoryImpl
 import com.serioussem.globaltestproject.data.retrofit.RetrofitService
 import com.serioussem.globaltestproject.domain.repository.Repository
@@ -15,6 +16,6 @@ object DataModule {
     @Provides
     @Singleton
     fun provideRepository(
-        service: RetrofitService
+        service: JsoupService
     ): Repository = RepositoryImpl( service = service)
 }

@@ -20,15 +20,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initData()
+
         initObservers()
     }
+
     private fun initObservers() {
         viewModel.data.observe(this@MainActivity) {
-            binding.textView.text = it.toString()
+            binding.dataTv.text = it.toString()
         }
-    }
-    private fun initData() {
-        viewModel.fetchData()
     }
 }
