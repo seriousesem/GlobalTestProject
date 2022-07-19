@@ -7,7 +7,7 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(private val service: JsoupService) : Repository {
     override suspend fun loadData(): String =
         try {
-            service.connectToSite()
+            service.fetchSchoolJournalHtml()
         }catch (e: Exception){
             e.message.toString()
         }

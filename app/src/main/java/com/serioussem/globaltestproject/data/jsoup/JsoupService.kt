@@ -2,8 +2,6 @@ package com.serioussem.globaltestproject.data.jsoup
 
 import org.jsoup.Connection
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.select.Elements
 import javax.inject.Inject
 
 class JsoupService @Inject constructor() {
@@ -19,43 +17,38 @@ class JsoupService @Inject constructor() {
     private var journalUrl: String =
         "${baseUrl}pupil/${pupilId}/dnevnik/quarter/${quarterId}/week/${weekId}"
     lateinit var siteHtml: String
-    lateinit var securityTokenKey: String
-    lateinit var securityTokenValue: String
 
-    fun connectToSite(): String {
+    fun fetchSchoolJournalHtml(): String {
         try {
-            val loginGet: Connection.Response = Jsoup
+            val responseFromLoginPage = Jsoup
                 .connect("https://phgim.e-schools.info/login_")
                 .userAgent(userAgent)
                 .timeout(5000)
                 .method(Connection.Method.GET)
-                .execute();
-            val loginPage: Document = loginGet.parse()
-            val securityToken: Elements = loginPage.select("input[name=csrfmiddlewaretoken]")
-            securityTokenKey = securityToken.attr("name")
-            securityTokenValue = securityToken.attr("value")
+                .execute()
 
+            val loginPageHtml = responseFromLoginPage.parse()
+            val securityToken = loginPageHtml.select("input[name=csrfmiddlewaretoken]")
+            val securityTokenKey = securityToken.attr("name")
+            val securityTokenValue = securityToken.attr("value")
 
-
-            val loginPost: Connection.Response = Jsoup
+            val requestToLoginPage = Jsoup
                 .connect(loginUrl)
                 .timeout(5000)
                 .data(securityTokenKey, securityTokenValue)
                 .data("password", password)
                 .data("username", login)
-                .cookies(loginGet.cookies())
+                .cookies(responseFromLoginPage.cookies())
                 .userAgent(userAgent)
                 .referrer(loginUrl)
                 .method(Connection.Method.POST)
                 .postDataCharset("windows-1251")
                 .execute()
 
-//            siteHtml = loginPost.cookies().toString()
-
             siteHtml = Jsoup
                 .connect(journalUrl)
                 .timeout(5000)
-                .cookies(loginPost.cookies())
+                .cookies(requestToLoginPage.cookies())
                 .get()
                 .toString()
         } catch (e: Exception) {
